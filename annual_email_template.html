@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <title>{{ subject }}</title>
+  <style>
+    table { border-collapse: separate; }
+    img { border: 0; display: block; }
+    @media only screen and (max-width: 640px) {
+      .email-shell { width: 100% !important; }
+      .content-pad { padding-left: 24px !important; padding-right: 24px !important; }
+      .hero-title { font-size: 38px !important; line-height: 44px !important; }
+      .story-title { font-size: 28px !important; line-height: 35px !important; }
+      .story-number { font-size: 72px !important; line-height: 78px !important; letter-spacing: -2px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background:#e9eee9; font-family:Arial, Helvetica, sans-serif; color:#21352e;">
+  <div style="display:none; max-height:0; overflow:hidden; opacity:0; color:transparent; mso-hide:all;">
+    {{ preheader }}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+  </div>
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#e9eee9;">
+    <tr>
+      <td align="center" style="padding:28px 12px;">
+        <table role="presentation" class="email-shell" width="640" cellspacing="0" cellpadding="0" border="0" style="width:640px; max-width:640px; background:#ffffff; border-radius:22px; overflow:hidden;">
+          <tr>
+            <td class="content-pad" style="padding:56px 46px 54px 46px; background:#173f34; text-align:left;">
+              <div style="margin-bottom:16px; font-size:13px; line-height:18px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:#cfe1d8;">
+                MammalWeb · {{ year }} annual story
+              </div>
+              <h1 class="hero-title" style="margin:0 0 18px 0; font-size:46px; line-height:52px; font-weight:800; color:#ffffff;">
+                {{ opening.headline }}
+              </h1>
+              <p style="margin:0; max-width:520px; font-size:19px; line-height:30px; color:#edf5f1;">
+                Hi there. {{ opening.text }}
+              </p>
+            </td>
+          </tr>
+          {% for story in stories %}
+          {% if story.theme == "forest" %}
+            {% set bg = "#214f41" %}
+            {% set fg = "#ffffff" %}
+            {% set muted = "#d8e7e1" %}
+            {% set accent = "#f4b95f" %}
+            {% set barbg = "#477164" %}
+          {% elif story.theme == "sage" %}
+            {% set bg = "#dce9df" %}
+            {% set fg = "#173f34" %}
+            {% set muted = "#4f685f" %}
+            {% set accent = "#cc7c36" %}
+            {% set barbg = "#c3d5c8" %}
+          {% elif story.theme == "amber" %}
+            {% set bg = "#f2c66f" %}
+            {% set fg = "#2e342f" %}
+            {% set muted = "#5f594c" %}
+            {% set accent = "#173f34" %}
+            {% set barbg = "#dfaf52" %}
+          {% else %}
+            {% set bg = "#f6f3eb" %}
+            {% set fg = "#21352e" %}
+            {% set muted = "#5d6c66" %}
+            {% set accent = "#cc7c36" %}
+            {% set barbg = "#e4ded1" %}
+          {% endif %}
+          <tr>
+            <td class="content-pad" style="padding:62px 46px 60px 46px; background:{{ bg }}; color:{{ fg }};">
+              <div style="margin-bottom:16px; font-size:13px; line-height:18px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:{{ muted }};">
+                {{ loop.index }} of {{ story_count }} · {{ story.eyebrow }}
+              </div>
+              <h2 class="story-title" style="margin:0 0 24px 0; max-width:540px; font-size:34px; line-height:41px; font-weight:800; color:{{ fg }};">
+                {{ story.title }}
+              </h2>
+              {% if story.number is not none %}
+              <div class="story-number" style="margin:0; font-size:92px; line-height:96px; font-weight:900; letter-spacing:-3px; color:{{ accent }};">
+                {{ story.number }}
+              </div>
+              {% if story.number_label %}
+              <div style="margin:5px 0 24px 0; max-width:500px; font-size:20px; line-height:27px; font-weight:700; color:{{ fg }};">
+                {{ story.number_label }}
+              </div>
+              {% endif %}
+              {% endif %}
+              <p style="margin:0; max-width:530px; font-size:17px; line-height:28px; color:{{ muted }};">
+                {{ story.text }}
+              </p>
+              {% if story.reflection %}
+              <p style="margin:14px 0 0 0; max-width:530px; font-size:15px; line-height:24px; color:{{ muted }};">
+                {{ story.reflection }}
+              </p>
+              {% endif %}
+              {% if story.participation_sections %}
+                {% for section in story.participation_sections %}
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:30px; border-top:1px solid {{ barbg }};">
+                  <tr>
+                    <td style="padding:24px 0 4px 0;">
+                      <div style="font-size:13px; line-height:18px; font-weight:800; letter-spacing:0.8px; text-transform:uppercase; color:{{ accent }};">
+                        {{ section.role_label }} pattern · {{ section.pattern_label }}
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0 0 4px 0; font-size:58px; line-height:64px; font-weight:900; letter-spacing:-2px; color:{{ accent }};">
+                      {{ section.number }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0 0 14px 0; font-size:16px; line-height:23px; font-weight:700; color:{{ fg }};">
+                      {{ section.number_label }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0 0 8px 0; font-size:21px; line-height:28px; font-weight:800; color:{{ fg }};">
+                      {{ section.headline }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0; font-size:15px; line-height:24px; color:{{ muted }};">
+                      {{ section.text }}
+                    </td>
+                  </tr>
+                  {% if section.reflection %}
+                  <tr>
+                    <td style="padding:12px 0 0 0; font-size:14px; line-height:23px; color:{{ muted }};">
+                      {{ section.reflection }}
+                    </td>
+                  </tr>
+                  {% endif %}
+                </table>
+                {% endfor %}
+              {% elif story.project_sections %}
+                {% for section in story.project_sections %}
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:30px; border-top:1px solid {{ barbg }};">
+                  <tr>
+                    <td style="padding:24px 0 4px 0;">
+                      <div style="font-size:13px; line-height:18px; font-weight:800; letter-spacing:0.8px; text-transform:uppercase; color:{{ accent }};">
+                        {{ section.role_label }} focus · {{ section.focus_label }}
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0 0 8px 0; font-size:21px; line-height:28px; font-weight:800; color:{{ fg }};">
+                      {{ section.headline }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0 0 6px 0; font-size:15px; line-height:24px; color:{{ muted }};">
+                      {{ section.text }}
+                    </td>
+                  </tr>
+                  {% if section.reflection %}
+                  <tr>
+                    <td style="padding:8px 0 2px 0; font-size:14px; line-height:23px; color:{{ muted }};">
+                      {{ section.reflection }}
+                    </td>
+                  </tr>
+                  {% endif %}
+                  {% for project in section.project_bars %}
+                  <tr>
+                    <td style="padding:13px 0 4px 0;">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                          <td style="padding-bottom:7px; font-size:14px; line-height:20px; font-weight:700; color:{{ fg }};">
+                            {{ project.project_name }}
+                          </td>
+                          <td align="right" style="padding-bottom:7px; font-size:14px; line-height:20px; color:{{ muted }}; white-space:nowrap;">
+                            {{ project.percentage }}%
+                          </td>
+                        </tr>
+                      </table>
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:{{ barbg }}; border-radius:7px; overflow:hidden;">
+                        <tr>
+                          <td width="{{ project.bar_width }}%" style="width:{{ project.bar_width }}%; height:11px; background:{{ accent }}; border-radius:7px; font-size:1px; line-height:1px;">&nbsp;</td>
+                          <td width="{{ project.remainder_width }}%" style="width:{{ project.remainder_width }}%; height:11px; font-size:1px; line-height:1px;">&nbsp;</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </table>
+                {% endfor %}
+              {% elif story.project_bars %}
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:30px;">
+                {% for project in story.project_bars %}
+                <tr>
+                  <td style="padding:0 0 17px 0;">
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="padding-bottom:7px; font-size:14px; line-height:20px; font-weight:700; color:{{ fg }};">
+                          {{ project.project_name }}
+                        </td>
+                        <td align="right" style="padding-bottom:7px; font-size:14px; line-height:20px; color:{{ muted }}; white-space:nowrap;">
+                          {{ project.percentage }}%
+                        </td>
+                      </tr>
+                    </table>
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:{{ barbg }}; border-radius:7px; overflow:hidden;">
+                      <tr>
+                        <td width="{{ project.bar_width }}%" style="width:{{ project.bar_width }}%; height:11px; background:{{ accent }}; border-radius:7px; font-size:1px; line-height:1px;">&nbsp;</td>
+                        <td width="{{ project.remainder_width }}%" style="width:{{ project.remainder_width }}%; height:11px; font-size:1px; line-height:1px;">&nbsp;</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td class="content-pad" style="padding:58px 46px 56px 46px; background:#ffffff; text-align:left;">
+              <div style="margin-bottom:14px; font-size:13px; line-height:18px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; color:#789087;">
+                What your year added up to
+              </div>
+              <h2 style="margin:0 0 18px 0; max-width:540px; font-size:34px; line-height:41px; font-weight:800; color:#173f34;">
+                {{ impact.headline }}
+              </h2>
+              <p style="margin:0; max-width:530px; font-size:18px; line-height:29px; color:#53675f;">
+                {{ impact.text }}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="content-pad" align="center" style="padding:58px 46px 62px 46px; background:#f6f3eb;">
+              <h2 style="margin:0 0 13px 0; font-size:32px; line-height:39px; font-weight:800; color:#173f34;">
+                Thank you for being part of MammalWeb.
+              </h2>
+              <p style="margin:0 0 25px 0; max-width:510px; font-size:17px; line-height:28px; color:#5b6d66;">
+                We hope you will return next year and see how your MammalWeb story continues.
+              </p>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td bgcolor="#173f34" style="border-radius:10px;">
+                    <a href="{{ dashboard_url }}" style="display:inline-block; padding:15px 25px; font-size:16px; line-height:20px; color:#ffffff; text-decoration:none; font-weight:700;">
+                      View your dashboard
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:20px 30px; background:#e9eee9; text-align:center;">
+              <p style="margin:0; font-size:12px; line-height:19px; color:#71827b;">
+                Prototype summary for activity recorded between {{ period_start }} and {{ period_end }}.
+                Figures may change if records are reviewed or updated.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
